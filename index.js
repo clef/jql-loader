@@ -36,8 +36,13 @@ module.exports = function(content) {
   jqlCompiler.runAsChild(function(err, entries, compilation) {
     if(err) return callback(err)
 
-    var source = compilation.assets[compilation.hash + ".jql.js"].source()
-    var strFn = "function main() { var _main = " + source + " \n if(_main.default) { return _main.default() } else { return _main() } }"
-    return callback(null, "module.exports = " + JSON.stringify(strFn))
+    var file = compilation.assets[compilation.hash + ".jql.js"]
+    if (file) {
+      var source = file.source()
+      var strFn = "function main() { var _main = " + source + " \n if(_main.default) { return _main.default() } else { return _main() } }"
+      return callback(null, "module.exports = " + JSON.stringify(strFn))
+    } else {
+      return callback(null, null)
+    }
   })
 }
