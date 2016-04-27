@@ -33,7 +33,7 @@ module.exports.pitch = function(request) {
     }
   })
 
-  jqlCompiler.compile(function(err, compilation) {
+  jqlCompiler.runAsChild(function(err, entries, compilation) {
     if(err) return callback(err)
 
     var source = compilation.assets[compilation.hash + ".jql.js"].source()
