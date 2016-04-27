@@ -10,13 +10,7 @@ Install the `jql-loader` package via npm:
 $ npm install jql-loader
 ```
 
-Once it is installed, you can either use it in a require :
-
-```javascript
-var query = require("jql!./query.jql")
-```
-
-Or add it to your webpack config:
+Add it to your webpack config:
 
 ```json
 {
@@ -28,6 +22,31 @@ Or add it to your webpack config:
         }
     ]
 }
+```
+
+Write a new query file that exports a `main` function. You can `require` in this file as if it was a normal file being built with webpack.
+
+```javascript
+var OtherCode = require('./some/other/code')
+
+function main() {
+    return Events({
+        from_date: '2015-01-01',
+        to_date: '2015-06-01'
+    })
+    .groupByUser(OtherCode.reducer)
+}
+
+export default main
+```
+
+Then require and run the JQL query:
+
+```javascript
+let query = require('./jql/queries/retention.jql')
+MP.api.jql(query).done((results) => {
+    console.log(results)
+})
 ```
 
 ## Caveats
