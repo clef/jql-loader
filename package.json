@@ -1,6 +1,6 @@
 {
   "name": "jql-loader",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A loader to make writing Mixpanel JQL with code reuse easy.",
   "main": "index.js",
   "scripts": {
