@@ -12,7 +12,7 @@ $ npm install jql-loader
 
 Add it to your webpack config:
 
-```json
+```javascript
 {
     loaders: [
         {
