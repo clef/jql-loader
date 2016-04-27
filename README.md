@@ -37,7 +37,7 @@ function main() {
     .groupByUser(OtherCode.reducer)
 }
 
-export default main
+module.exports = main
 ```
 
 Then require and run the JQL query:
