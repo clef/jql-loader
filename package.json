@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/clef/jql-loader#readme",
   "dependencies": {
+    "loader-utils": "^0.2.14",
     "webpack": "^1.13.0"
   }
 }
