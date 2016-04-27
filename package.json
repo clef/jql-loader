@@ -1,5 +1,5 @@
 {
-  "name": "@clef/jql-loader",
+  "name": "jql-loader",
   "version": "1.0.0",
   "description": "A loader to make writing Mixpanel JQL with code reuse easy.",
   "main": "index.js",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/clef/jql-loader/issues"
   },
-  "homepage": "https://github.com/clef/jql-loader#readme"
+  "homepage": "https://github.com/clef/jql-loader#readme",
+  "dependencies": {
+    "webpack": "^1.13.0"
+  }
 }
