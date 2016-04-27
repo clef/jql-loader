@@ -18,7 +18,7 @@ Add it to your webpack config:
         {
             test: /\.jql$/,
             exclude: /node_modules/,
-            loader: 'jql-loader'
+            loaders: ['jql-loader', 'babel-loader']
         }
     ]
 }
@@ -27,7 +27,7 @@ Add it to your webpack config:
 Write a new query file that exports a `main` function. You can `require` in this file as if it was a normal file being built with webpack.
 
 ```javascript
-var OtherCode = require('./some/other/code')
+import OtherCode from './some/other/code'
 
 function main() {
     return Events({
@@ -37,7 +37,7 @@ function main() {
     .groupByUser(OtherCode.reducer)
 }
 
-module.exports = main
+export default main
 ```
 
 Then require and run the JQL query:

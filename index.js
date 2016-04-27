@@ -3,9 +3,9 @@ var path = require("path")
 var loaderUtils = require("loader-utils")
 var MemoryFS = require("memory-fs")
 
-module.exports = function() {}
-module.exports.pitch = function(request) {
+module.exports = function(content) {
   if(!this.webpack) throw new Error("Only usable with webpack")
+  if (this._compiler.isChild()) return content
 
   var callback = this.async()
   var query = loaderUtils.parseQuery(this.query)
@@ -22,9 +22,9 @@ module.exports.pitch = function(request) {
 
   var jqlCompiler = this._compilation.createChildCompiler("jql", outputOptions)
   jqlCompiler.outputFileSystem = new MemoryFS()
-  jqlCompiler.apply(new SingleEntryPlugin(this.context, "!!" + request, "main"))
+  jqlCompiler.apply(new SingleEntryPlugin(this.context, "!!" + this.request, "main"))
 
-  var subCache = "subcache " + __dirname + " " + request
+  var subCache = "subcache " + __dirname + " " + this.request
   jqlCompiler.plugin("compilation", function(compilation) {
     if(compilation.cache) {
       if(!compilation.cache[subCache])
@@ -37,7 +37,7 @@ module.exports.pitch = function(request) {
     if(err) return callback(err)
 
     var source = compilation.assets[compilation.hash + ".jql.js"].source()
-    var strFn = "function main() { var _main = " + source + " \n return _main() }"
+    var strFn = "function main() { var _main = " + source + " \n if(_main.default) { return _main.default() } else { return _main() } }"
     return callback(null, "module.exports = " + JSON.stringify(strFn))
   })
 }
