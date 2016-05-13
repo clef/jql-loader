@@ -1,6 +1,9 @@
 # jql-loader
 
-A loader to make writing Mixpanel JQL with code reuse easy.
+A loader to make writing Mixpanel JQL with code reuse easy. It's used to create:
+
+* [jql-query-active-users](https://github.com/clef/jql-query-active-users)
+* [jql-query-retention](https://github.com/clef/jql-query-retention)
 
 ## Usage
 
