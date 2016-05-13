@@ -27,14 +27,18 @@ Add it to your webpack config:
 Write a new query file that exports a `main` function. You can `require` in this file as if it was a normal file being built with webpack.
 
 ```javascript
-import OtherCode from './some/other/code'
+import * as DateHelper from 'jql/helpers/DateHelper'
 
-function main() {
-    return Events({
-        from_date: '2015-01-01',
-        to_date: '2015-06-01'
-    })
-    .groupByUser(OtherCode.reducer)
+function main () {
+  return Events({
+    from_date: DateHelper.formatDate(params.fromDate),
+    to_date: DateHelper.formatDate(params.toDate),
+    event_selectors: params.events
+  })
+  .groupByUser([event => {
+    return new Date(event.time).toISOString().substr(0, 10)
+  }], mixpanel.reducer.noop())
+  .groupBy(['key.1'], mixpanel.reducer.count())
 }
 
 export default main
@@ -43,8 +47,15 @@ export default main
 Then require and run the JQL query:
 
 ```javascript
-let query = require('./jql/queries/retention.jql')
-MP.api.jql(query).done((results) => {
+let ActiveUsersQuery = require('jql/queries/ActiveUsers.jql')
+MP.api.jql(
+    ActiveUsersQuery,
+    {
+        fromDate: moment().subtract(20, 'days').toDate(),
+        toDate: moment().toDate(),
+        events: []
+    }
+).done((results) => {
     console.log(results)
 })
 ```
