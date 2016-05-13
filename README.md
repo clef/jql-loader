@@ -7,7 +7,7 @@ A loader to make writing Mixpanel JQL with code reuse easy.
 Install the `jql-loader` package via npm:
 
 ```shell
-$ npm install jql-loader
+$ npm install --save-dev jql-loader
 ```
 
 Add it to your webpack config:
