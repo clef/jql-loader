@@ -49,6 +49,10 @@ MP.api.jql(query).done((results) => {
 })
 ```
 
+## Example
+
+If you'd like to see an example `webpack.config.js` and project, check out the [example/](example/) folder. It can also serve as a nice playground for writing reusable JQL queries.
+
 ## Caveats
 
 Because of the way Mixpanel JQL is architected, every query needs to include all of the source necessary to run the `main` function. This means that every JQL query built with `jql-loader` will load _all_ of its dependencies. This means that if you have multiple JQL queries that depend on the same code, it will be loaded _multiple times_ into your JS bundle. This means your bundle can get very large very fast.

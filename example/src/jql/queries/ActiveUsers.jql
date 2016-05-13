@@ -1,0 +1,29 @@
+/* ActiveUsers.jql
+ *
+ * A JQL query that gets active users over a period of time.
+ *
+ * Params:
+ *
+ *  - fromDate: new Date
+ *  - toDate: new Date
+ *  - events: [ jql.types.Event ]
+ *
+ *    A list of JQL events that qualify a user as active if they complete
+ *    one of the.
+ *
+ */
+import * as DateHelper from 'jql/helpers/DateHelper'
+
+function main () {
+  return Events({
+    from_date: DateHelper.formatDate(params.fromDate),
+    to_date: DateHelper.formatDate(params.toDate),
+    event_selectors: params.events
+  })
+  .groupByUser([event => {
+    return new Date(event.time).toISOString().substr(0, 10)
+  }], mixpanel.reducer.noop())
+  .groupBy(['key.1'], mixpanel.reducer.count())
+}
+
+export default main
