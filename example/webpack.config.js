@@ -19,14 +19,10 @@ var config = {
       {
         test: /\.(js|jql)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react', 'react-hmre']
-        }
+        loader: 'babel-loader'
       },
       {
         test: /\.jql$/,
-        exclude: /node_modules/,
         loader: 'jql-loader'
       }
     ],

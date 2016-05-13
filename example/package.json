@@ -32,7 +32,15 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "html-webpack-plugin": "^2.16.1",
+    "jql-tools": "^1.0.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "react-hmre"
+    ]
   }
 }

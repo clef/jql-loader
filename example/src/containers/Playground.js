@@ -1,5 +1,4 @@
 import React from 'react'
-import Event from 'jql/types/Event'
 import ActiveUsersQuery from 'jql/queries/ActiveUsers'
 
 class Playground extends React.Component {

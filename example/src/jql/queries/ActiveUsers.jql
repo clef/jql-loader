@@ -12,12 +12,12 @@
  *    one of the.
  *
  */
-import * as DateHelper from 'jql/helpers/DateHelper'
+import { helpers } from 'jql-tools'
 
 function main () {
   return Events({
-    from_date: DateHelper.formatDate(params.fromDate),
-    to_date: DateHelper.formatDate(params.toDate),
+    from_date: helpers.DateHelper.formatDate(params.fromDate),
+    to_date: helpers.DateHelper.formatDate(params.toDate),
     event_selectors: params.events
   })
   .groupByUser([event => {
